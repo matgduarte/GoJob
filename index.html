@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoJob - Conectando Talentos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .btn-primary {
+            background: #ff6b6b;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        main {
+            padding-top: 80px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .features {
+            padding: 4rem 0;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .how-it-works {
+            padding: 4rem 0;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        .cta {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa726 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="index-header">
+        <nav class="index-nav">
+            <div class="index-logo">GoJob</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#como-funciona">Como Funciona</a></li>
+                <li><a href="./pages/sobre.html">Sobre</a></li>
+                <li><a href="./pages/buscar.html">Buscar</a></li>
+            </ul>
+            <a href="./pages/cadastro.html" class="btn-primary">Cadastre-se</a>
+        </nav>
+    </header>
+
+    <main class="index-main">
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h1>Conecte-se com os Melhores Profissionais</h1>
+                <p>GoJob é a plataforma que conecta você aos melhores autônomos do Brasil. Encontre o profissional ideal para seu projeto ou ofereça seus serviços.</p>
+                <div class="hero-buttons">
+                    <a href="./pages/cadastro.html" class="btn-primary">Começar Agora</a>
+                    <a href="./pages/buscar.html" class="btn-secondary">Buscar Profissionais</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2>Por que escolher o GoJob?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Busca Inteligente</h3>
+                        <p>Encontre exatamente o que precisa com nossos filtros avançados e sistema de recomendações.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⭐</div>
+                        <h3>Profissionais Verificados</h3>
+                        <p>Todos os profissionais passam por verificação e têm avaliações reais de outros clientes.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <h3>Chat Integrado</h3>
+                        <p>Converse diretamente com os profissionais para tirar dúvidas e alinhar expectativas.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>Pagamento Seguro</h3>
+                        <p>Sistema de pagamento protegido com garantia para ambas as partes.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>Fácil de Usar</h3>
+                        <p>Interface intuitiva que funciona perfeitamente em qualquer dispositivo.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Resultados Rápidos</h3>
+                        <p>Encontre e contrate profissionais em questão de minutos, não dias.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-it-works" id="como-funciona">
+            <div class="container">
+                <h2>Como Funciona</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Cadastre-se</h3>
+                        <p>Crie sua conta como cliente ou profissional em poucos minutos</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Busque ou Anuncie</h3>
+                        <p>Encontre profissionais ou publique seus serviços</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Conecte-se</h3>
+                        <p>Use nosso chat para negociar detalhes e tirar dúvidas</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>Trabalhe</h3>
+                        <p>Execute o projeto com segurança e tranquilidade</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <h2>Pronto para começar?</h2>
+                <p>Junte-se a milhares de profissionais e clientes que já confiam no GoJob</p>
+                <br>
+                <a href="./pages/cadastro.html" class="btn-primary" style="background: white; color: #667eea; font-size: 1.1rem; padding: 1rem 2rem;">Cadastrar Agora</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="index-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GoJob</h3>
+                    <p>Conectando talentos e oportunidades</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Links Úteis</h3>
+                    <p><a href="./pages/buscar.html">Buscar Profissionais</a></p>
+                    <p><a href="./pages/cadastro.html">Cadastre-se</a></p>
+                    <p><a href="./pages/sobre.html">Sobre Nós</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p><a href="mailto:contato@gojob.com">contato@gojob.com</a></p>
+                    <p><a href="tel:+5511999999999">(11) 99999-9999</a></p>
+                </div>
+            </div>
+            <p>&copy; 2025 GoJob. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>

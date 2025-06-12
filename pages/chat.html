@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - GoJob</title>
+
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="chat-page">
+    <header>
+        <a class="logo" href="../">
+            <h1>GoJob</h1>
+        </a>
+        <div class="user-info">
+            <button class="logout-btn" onclick="window.location.href='./buscar.html'">Buscar</button>
+            <a href="./perfil.html">
+            <img class="user-avatar" src="../img/Paulinho.png">
+            </a>
+        </div>
+    </header>
+
+    <div class="chat-container">
+        <div class="chat-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">Conversas</div>
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar conversas..." id="searchInput">
+                    <span class="search-icon">🔍</span>
+                </div>
+            </div>
+            
+            <div class="chat-list">
+                <div class="chat-item active" data-contact="maria">
+                    <div class="contact-avatar" style="background: #ff6b6b; position: relative;">
+                        MS
+                        <div class="online-indicator"></div>
+                    </div>
+                    <div class="chat-info">
+                        <div class="chat-name">Maria Santos</div>
+                        <div class="chat-preview">Perfeito! Quando podemos começar?</div>
+                    </div>
+                    <div class="chat-meta">
+                        <div class="chat-time">14:32</div>
+                        <div class="unread-badge">2</div>
+                    </div>
+                </div>
+
+                <div class="chat-item" data-contact="pedro">
+                    <div class="contact-avatar" style="background: #4caf50;">
+                        PO
+                    </div>
+                    <div class="chat-info">
+                        <div class="chat-name">Pedro Oliveira</div>
+                        <div class="chat-preview">Obrigado pelo excelente trabalho!</div>
+                    </div>
+                    <div class="chat-meta">
+                        <div class="chat-time">12:45</div>
+                    </div>
+                </div>
+
+                <div class="chat-item" data-contact="ana">
+                    <div class="contact-avatar" style="background: #ff9800;">
+                        AC
+                    </div>
+                    <div class="chat-info">
+                        <div class="chat-name">Ana Costa</div>
+                        <div class="chat-preview">Você: Vou enviar as propostas hoje</div>
+                    </div>
+                    <div class="chat-meta">
+                        <div class="chat-time">10:20</div>
+                    </div>
+                </div>
+
+                <div class="chat-item" data-contact="lucas">
+                    <div class="contact-avatar" style="background: #9c27b0;">
+                        LS
+                    </div>
+                    <div class="chat-info">
+                        <div class="chat-name">Lucas Silva</div>
+                        <div class="chat-preview">Preciso do orçamento para o projeto</div>
+                    </div>
+                    <div class="chat-meta">
+                        <div class="chat-time">Ontem</div>
+                    </div>
+                </div>
+
+                <div class="chat-item" data-contact="carla">
+                    <div class="contact-avatar" style="background: #795548;">
+                        CR
+                    </div>
+                    <div class="chat-info">
+                        <div class="chat-name">Carla Rodrigues</div>
+                        <div class="chat-preview">Os mockups ficaram ótimos!</div>
+                    </div>
+                    <div class="chat-meta">
+                        <div class="chat-time">Ontem</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-main">
+            <div class="chat-header">
+                <div class="current-contact">
+                    <div class="current-avatar" style="background: #ff6b6b; position: relative;">
+                        MS
+                        <div class="online-indicator"></div>
+                    </div>
+                    <div class="current-info">
+                        <h3>Maria Santos</h3>
+                        <div class="current-status">Online agora</div>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button class="action-btn" title="Chamada de vídeo">📹</button>
+                    <button class="action-btn" title="Ligar">📞</button>
+                    <button class="action-btn" title="Mais opções">⋮</button>
+                </div>
+            </div>
+
+            <div class="messages-container" id="messagesContainer">
+                <div class="message received">
+                    <div class="message-avatar" style="background: #ff6b6b;">MS</div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            Olá! Vi seu portfólio e fiquei impressionada com seus trabalhos. Você teria disponibilidade para criar um logo para minha startup?
+                        </div>
+                        <div class="message-time">13:45</div>
+                    </div>
+                </div>
+
+                <div class="message sent">
+                    <div class="message-avatar" style="background: #667eea;">JS</div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            Olá Maria! Muito obrigado pelo interesse. Sim, tenho disponibilidade. Pode me contar mais sobre o projeto?
+                        </div>
+                        <div class="message-time">13:50</div>
+                    </div>
+                </div>
+
+                <div class="message received">
+                    <div class="message-avatar" style="background: #ff6b6b;">MS</div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            É uma startup de tecnologia focada em IoT. Precisamos de um logo moderno e profissional. Qual seria o valor e prazo?
+                        </div>
+                        <div class="message-time">13:52</div>
+                    </div>
+                </div>
+
+                <div class="message sent">
+                    <div class="message-avatar" style="background: #667eea;">JS</div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            Para um projeto de identidade visual completa (logo + manual de marca), trabalho com valor de R$ 800,00 com prazo de 7 dias úteis. Inclui 3 revisões.
+                        </div>
+                        <div class="message-time">14:10</div>
+                    </div>
+                </div>
+
+                <div class="message received">
+                    <div class="message-avatar" style="background: #ff6b6b;">MS</div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            Perfeito! Quando podemos começar?
+                        </div>
+                        <div class="file-attachment">
+                            <div class="file-icon">📄</div>
+                            <div class="file-info">
+                                <div class="file-name">briefing-startup.pdf</div>
+                                <div class="file-size">2.3 MB</div>
+                            </div>
+                        </div>
+                        <div class="message-time">14:32</div>
+                    </div>
+                </div>
+
+                <div class="typing-indicator" id="typingIndicator">
+                    <span class="typing-dots">Maria está digitando...</span>
+                </div>
+            </div>
+
+            <div class="message-input-container">
+                <button class="attachment-btn" title="Anexar arquivo">📎</button>
+                <textarea class="message-input" placeholder="Digite sua mensagem..." id="messageInput"></textarea>
+                <button class="send-btn" id="sendBtn" disabled>➤</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados dos contatos para simulação
+        const contacts = {
+            maria: {
+                name: 'Maria Santos',
+                avatar: 'MS',
+                color: '#ff6b6b',
+                status: 'Online agora',
+                messages: [
+                    { type: 'received', text: 'Olá! Vi seu portfólio e fiquei impressionada com seus trabalhos. Você teria disponibilidade para criar um logo para minha startup?', time: '13:45' },
+                    { type: 'sent', text: 'Olá Maria! Muito obrigado pelo interesse. Sim, tenho disponibilidade. Pode me contar mais sobre o projeto?', time: '13:50' },
+                    { type: 'received', text: 'É uma startup de tecnologia focada em IoT. Precisamos de um logo moderno e profissional. Qual seria o valor e prazo?', time: '13:52' },
+                    { type: 'sent', text: 'Para um projeto de identidade visual completa (logo + manual de marca), trabalho com valor de R$ 800,00 com prazo de 7 dias úteis. Inclui 3 revisões.', time: '14:10' },
+                    { type: 'received', text: 'Perfeito! Quando podemos começar?', time: '14:32', attachment: { name: 'briefing-startup.pdf', size: '2.3 MB' } }
+                ]
+            },
+            pedro: {
+                name: 'Pedro Oliveira',
+                avatar: 'PO',
+                color: '#4caf50',
+                status: 'Visto por último às 12:30',
+                messages: [
+                    { type: 'received', text: 'O projeto ficou excelente! Muito obrigado pelo trabalho.', time: '12:45' },
+                    { type: 'sent', text: 'Fico muito feliz que tenha gostado! Foi um prazer trabalhar com você.', time: '12:46' },
+                    { type: 'received', text: 'Obrigado pelo excelente trabalho!', time: '12:45' }
+                ]
+            }
+        };
+
+        let currentContact = 'maria';
+
+        // Elements
+        const messageInput = document.getElementById('messageInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const messagesContainer = document.getElementById('messagesContainer');
+        const typingIndicator = document.getElementById('typingIndicator');
+
+        // Alternar entre contatos
+        document.querySelectorAll('.chat-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                
+                currentContact = this.dataset.contact;
+                loadChat(currentContact);
+            });
+        });
+
+        // Carregar conversa
+        function loadChat(contactId) {
+            const contact = contacts[contactId];
+            if (!contact) return;
+
+            // Atualizar header
+            document.querySelector('.current-avatar').textContent = contact.avatar;
+            document.querySelector('.current-avatar').style.background = contact.color;
+            document.querySelector('.current-info h3').textContent = contact.name;
+            document.querySelector('.current-status').textContent = contact.status;
+
+            // Limpar mensagens
+            messagesContainer.innerHTML = '';
+
+            // Carregar mensagens
+            contact.messages.forEach(msg => {
+                addMessage(msg.text, msg.type, msg.time, msg.attachment);
+            });
+
+            scrollToBottom();
+        }
+
+        // Adicionar mensagem
+        function addMessage(text, type, time, attachment = null) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            
+            const contact = contacts[currentContact];
+            const avatarBg = type === 'sent' ? '#667eea' : contact.color;
+            const avatarText = type === 'sent' ? 'JS' : contact.avatar;
+            
+            let attachmentHtml = '';
+            if (attachment) {
+                attachmentHtml = `
+                    <div class="file-attachment">
+                        <div class="file-icon">📄</div>
+                        <div class="file-info">
+                            <div class="file-name">${attachment.name}</div>
+                            <div class="file-size">${attachment.size}</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            messageDiv.innerHTML = `
+                <div class="message-avatar" style="background: ${avatarBg};">${avatarText}</div>
+                <div class="message-content">
+                    <div class="message-bubble">${text}</div>
+                    ${attachmentHtml}
+                    <div class="message-time">${time}</div>
+                </div>
+            `;
+
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        // Enviar mensagem
+        function sendMessage() {
+            const text = messageInput.value.trim();
+            if (!text) return;
+
+            const now = new Date();
+            const time = now.getHours().toString().padStart(2, '0') + ':' + 
+                        now.getMinutes().toString().padStart(2, '0');
+
+            addMessage(text, 'sent', time);
+            messageInput.value = '';
+            sendBtn.disabled = true;
+
+            // Simular resposta automática após 2 segundos
+            setTimeout(() => {
+                showTypingIndicator();
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    const responses = [
+                        'Entendido!',
+                        'Perfeito, obrigado!',
+                        'Vou verificar e te respondo em breve.',
+                        'Combinado!',
+                        'Ótimo, aguardo o material.'
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    addMessage(randomResponse, 'received', time);
+                }, 2000);
+            }, 1000);
+        }
+
+        // Mostrar indicador de digitação
+        function showTypingIndicator() {
+            typingIndicator.style.display = 'block';
+            scrollToBottom();
+        }
+
+        // Esconder indicador de digitação
+        function hideTypingIndicator() {
+            typingIndicator.style.display = 'none';
+        }
+
+        // Rolar para baixo
+        function scrollToBottom() {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Event listeners
+        messageInput.addEventListener('input', function() {
+            sendBtn.disabled = this.value.trim() === '';
+        });
+
+        messageInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                if (!sendBtn.disabled) {
+                    sendMessage();
+                }
+            }
+        });
+
+        sendBtn.addEventListener('click', sendMessage);
+
+        // Busca de conversas
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            document.querySelectorAll('.chat-item').forEach(item => {
+                const name = item.querySelector('.chat-name').textContent.toLowerCase();
+                const preview = item.querySelector('.chat-preview').textContent.toLowerCase();
+                
+                if (name.includes(searchTerm) || preview.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Auto-resize textarea
+        messageInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        });
+
+        // Carregar conversa inicial
+        loadChat(currentContact);
+
+        // Função de logout
+        function logout() {
+            if (confirm('Tem certeza que deseja sair?')) {
+                alert('Logout realizado com sucesso!');
+                window.location.href = '../index.html';
+            }
+        }
+    </script>
+</body>
+</html>

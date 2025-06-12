@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Profissionais - GoJob</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <a class="logo" href="../">
+            <h1>GoJob</h1>
+        </a>
+        <div class="user-info">
+            <button class="logout-btn" onclick="window.location.href='./buscar.html'">Buscar</button>
+            <a href="./perfil.html">
+            <img class="user-avatar" src="../img/Paulinho.png">
+            </a>
+        </div>
+    </header>
+
+    <div class="container-busca">
+        <div class="search-header">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Buscar por serviço, habilidade ou profissional..." id="searchInput">
+                <button class="search-btn" onclick="performSearch()">🔍 Buscar</button>
+            </div>
+            <div class="filters">
+                <select class="filter-select" id="categoryFilter">
+                    <option value="">Todas as categorias</option>
+                    <option value="design">Design e Arte</option>
+                    <option value="programacao">Programação</option>
+                    <option value="marketing">Marketing Digital</option>
+                    <option value="redacao">Redação e Conteúdo</option>
+                    <option value="consultoria">Consultoria</option>
+                    <option value="fotografia">Fotografia</option>
+                </select>
+                <select class="filter-select" id="locationFilter">
+                    <option value="">Todas as cidades</option>
+                    <option value="sao-paulo">São Paulo</option>
+                    <option value="rio-janeiro">Rio de Janeiro</option>
+                    <option value="belo-horizonte">Belo Horizonte</option>
+                    <option value="brasilia">Brasília</option>
+                </select>
+                <select class="filter-select" id="priceFilter">
+                    <option value="">Qualquer preço</option>
+                    <option value="0-50">R$ 0 - 50/h</option>
+                    <option value="50-100">R$ 50 - 100/h</option>
+                    <option value="100-200">R$ 100 - 200/h</option>
+                    <option value="200+">R$ 200+/h</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="sidebar-filters">
+                <h3>Filtros Avançados</h3>
+                
+                <div class="filter-group">
+                    <label>Avaliação Mínima</label>
+                    <select>
+                        <option value="">Qualquer avaliação</option>
+                        <option value="4.5">4.5+ estrelas</option>
+                        <option value="4.0">4.0+ estrelas</option>
+                        <option value="3.5">3.5+ estrelas</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Experiência</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="iniciante">
+                            <label for="iniciante">Iniciante (0-2 anos)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="intermediario">
+                            <label for="intermediario">Intermediário (2-5 anos)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="avancado">
+                            <label for="avancado">Avançado (5-10 anos)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="especialista">
+                            <label for="especialista">Especialista (10+ anos)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label>Disponibilidade</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="disponivel">
+                            <label for="disponivel">Disponível agora</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="proxima-semana">
+                            <label for="proxima-semana">Próxima semana</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="proximo-mes">
+                            <label for="proximo-mes">Próximo mês</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label>Tipo de Trabalho</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="remoto">
+                            <label for="remoto">Remoto</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="presencial">
+                            <label for="presencial">Presencial</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="hibrido">
+                            <label for="hibrido">Híbrido</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-container">
+                <div class="results-header">
+                    <div class="results-count">
+                        247 profissionais encontrados
+                    </div>
+                    <div class="sort-options">
+                        <span>Ordenar por:</span>
+                        <select class="filter-select">
+                            <option value="relevancia">Relevância</option>
+                            <option value="preco-menor">Menor preço</option>
+                            <option value="preco-maior">Maior preço</option>
+                            <option value="avaliacao">Melhor avaliação</option>
+                            <option value="experiencia">Mais experiência</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Professional Cards -->
+                <div class="professional-card">
+                    <div class="professional-avatar">MS</div>
+                    <div class="professional-info">
+                        <div class="professional-header">
+                            <div>
+                                <div class="professional-name">Maria Santos</div>
+                                <div class="professional-title">Designer UX/UI</div>
+                                <div class="professional-location">📍 São Paulo, SP</div>
+                            </div>
+                            <div class="rating-price">
+                                <button class="favorite-btn">♡</button>
+                                <div class="rating">⭐ 4.9 (127 avaliações)</div>
+                                <div class="price">R$ 85/hora</div>
+                            </div>
+                        </div>
+                        <div class="professional-description">
+                            Especialista em design de interfaces com mais de 6 anos de experiência. Trabalho com foco na experiência do usuário, criando designs intuitivos e funcionais para web e mobile.
+                        </div>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Figma</span>
+                            <span class="skill-tag">Adobe XD</span>
+                            <span class="skill-tag">Prototipagem</span>
+                            <span class="skill-tag">User Research</span>
+                            <span class="skill-tag">Design System</span>
+                        </div>
+                        <div class="professional-actions">
+                            <a href="./perfil.html" class="btn-outline">Ver Perfil</a>
+                            <a href="./chat.html" class="btn-primary">Contratar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="professional-card">
+                    <div class="professional-avatar">CS</div>
+                    <div class="professional-info">
+                        <div class="professional-header">
+                            <div>
+                                <div class="professional-name">Carlos Santos</div>
+                                <div class="professional-title">Desenvolvedor Full Stack</div>
+                                <div class="professional-location">📍 Rio de Janeiro, RJ</div>
+                            </div>
+                            <div class="rating-price">
+                                <button class="favorite-btn">♡</button>
+                                <div class="rating">⭐ 4.8 (89 avaliações)</div>
+                                <div class="price">R$ 120/hora</div>
+                            </div>
+                        </div>
+                        <div class="professional-description">
+                            Desenvolvedor com 8 anos de experiência em React, Node.js e Python. Especializado em criar aplicações web robustas e escaláveis, desde o frontend até a infraestrutura.
+                        </div>
+                        <div class="skills-tags">
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                        </div>
+                        <div class="professional-actions">
+                            <a href="#" class="btn-outline">Ver Perfil</a>
+                            <a href="#" class="btn-primary">Contratar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="professional-card">
+                    <div class="professional-avatar">AL</div>
+                    <div class="professional-info">
+                        <div class="professional-header">
+                            <div>
+                                <div class="professional-name">Ana Luiza Costa</div>
+                                <div class="professional-title">Especialista em Marketing Digital</div>
+                                <div class="professional-location">📍 Belo Horizonte, MG</div>
+                            </div>
+                            <div class="rating-price">
+                                <button class="favorite-btn favorited">♥</button>
+                                <div class="rating">⭐ 4.9 (203 avaliações)</div>
+                                <div class="price">R$ 95/hora</div>
+                            </div>
+                        </div>
+                        <div class="professional-description">
+                            Estrategista digital com foco em crescimento orgânico e campanhas pagas. Ajudo empresas a aumentar sua presença online e converter mais leads em clientes.
+                        </div>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Google Ads</span>
+                            <span class="skill-tag">Facebook Ads</span>
+                            <span class="skill-tag">SEO</span>
+                            <span class="skill-tag">Analytics</span>
+                            <span class="skill-tag">Email Marketing</span>
+                        </div>
+                        <div class="professional-actions">
+                            <a href="#" class="btn-outline">Ver Perfil</a>
+                            <a href="#" class="btn-primary">Contratar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="professional-card">
+                    <div class="professional-avatar">RC</div>
+                    <div class="professional-info">
+                        <div class="professional-header">
+                            <div>
+                                <div class="professional-name">Rafael Carvalho</div>
+                                <div class="professional-title">Fotógrafo e Videomaker</div>
+                                <div class="professional-location">📍 Brasília, DF</div>
+                            </div>
+                            <div class="rating-price">
+                                <button class="favorite-btn">♡</button>
+                                <div class="rating">⭐ 4.7 (156 avaliações)</div>
+                                <div class="price">R$ 150/hora</div>
+                            </div>
+                        </div>
+                        <div class="professional-description">
+                            Fotógrafo especializado em eventos corporativos e ensaios. Também produzo conteúdo audiovisual para redes sociais e campanhas publicitárias.
+                        </div>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Fotografia</span>
+                            <span class="skill-tag">Edição</span>
+                            <span class="skill-tag">Adobe Premiere</span>
+                            <span class="skill-tag">After Effects</span>
+                            <span class="skill-tag">Lightroom</span>
+                        </div>
+                        <div class="professional-actions">
+                            <a href="#" class="btn-outline">Ver Perfil</a>
+                            <a href="#" class="btn-primary">Contratar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="professional-card">
+                    <div class="professional-avatar">JS</div>
+                    <div class="professional-info">
+                        <div class="professional-header">
+                            <div>
+                                <div class="professional-name">Juliana Souza</div>
+                                <div class="professional-title">Redatora e Criadora de Conteúdo</div>
+                                <div class="professional-location">📍 Porto Alegre, RS</div>
+                            </div>
+                            <div class="rating-price">
+                                <button class="favorite-btn">♡</button>
+                                <div class="rating">⭐ 4.8 (92 avaliações)</div>
+                                <div class="price">R$ 65/hora</div>
+                            </div>
+                        </div>
+                        <div class="professional-description">
+                            Jornalista especializada em marketing de conteúdo e copywriting. Crio textos persuasivos que conectam marcas aos seus públicos e geram resultados.
+                        </div>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Copywriting</span>
+                            <span class="skill-tag">SEO</span>
+                            <span class="skill-tag">Blog Posts</span>
+                            <span class="skill-tag">Redes Sociais</span>
+                            <span class="skill-tag">Email Marketing</span>
+                        </div>
+                        <div class="professional-actions">
+                            <a href="#" class="btn-outline">Ver Perfil</a>
+                            <a href="#" class="btn-primary">Contratar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="professional-card">
+                    <div class="professional-avatar">LM</div>
+                    <div class="professional-info">
+                        <div class="professional-header">
+                            <div>
+                                <div class="professional-name">Lucas Martins</div>
+                                <div class="professional-title">Consultor de Negócios</div>
+                                <div class="professional-location">📍 São Paulo, SP</div>
+                            </div>
+                            <div class="rating-price">
+                                <button class="favorite-btn">♡</button>
+                                <div class="rating">⭐ 4.9 (174 avaliações)</div>
+                                <div class="price">R$ 200/hora</div>
+                            </div>
+                        </div>
+                        <div class="professional-description">
+                            Consultor empresarial com MBA em gestão estratégica. Ajudo empresas a otimizar processos, aumentar produtividade e desenvolver estratégias de crescimento.
+                        </div>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Estratégia</span>
+                            <span class="skill-tag">Gestão</span>
+                            <span class="skill-tag">Processos</span>
+                            <span class="skill-tag">Análise Financeira</span>
+                            <span class="skill-tag">Planejamento</span>
+                        </div>
+                        <div class="professional-actions">
+                            <a href="#" class="btn-outline">Ver Perfil</a>
+                            <a href="#" class="btn-primary">Contratar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pagination">
+                    <button>← Anterior</button>
+                    <button class="active">1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button>4</button>
+                    <button>5</button>
+                    <button>Próxima →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value;
+            const category = document.getElementById('categoryFilter').value;
+            const location = document.getElementById('locationFilter').value;
+            const price = document.getElementById('priceFilter').value;
+            
+            console.log('Busca realizada:', {
+                termo: searchTerm,
+                categoria: category,
+                localizacao: location,
+                preco: price
+            });
+            
+            // Aqui você implementaria a lógica de busca real
+            alert('Busca realizada! Veja o console para os parâmetros.');
+        }
+
+        // Funcionalidade dos favoritos
+        document.querySelectorAll('.favorite-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('favorited');
+                this.innerHTML = this.classList.contains('favorited') ? '♥' : '♡';
+            });
+        });
+
+        // Funcionalidade de busca ao pressionar Enter
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // Funcionalidade dos filtros
+        document.querySelectorAll('.filter-select').forEach(filter => {
+            filter.addEventListener('change', function() {
+                console.log('Filtro alterado:', this.id, this.value);
+                // Aqui você implementaria a lógica de filtragem
+            });
+        });
+
+        // Funcionalidade dos checkboxes
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                console.log('Checkbox alterado:', this.id, this.checked);
+                // Aqui você implementaria a lógica de filtragem por checkbox
+            });
+        });
+
+        // Função de logout
+        function logout() {
+            if (confirm('Tem certeza que deseja sair?')) {
+                alert('Logout realizado com sucesso!');
+                window.location.href = '../index.html';
+            }
+        }
+    </script>
+</body>
+</html>
