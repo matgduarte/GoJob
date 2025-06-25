@@ -1,658 +1,368 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Perfil - GoJob</title>
-    <style>
-        .sidebar {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            height: fit-content;
-        }
-
-        .main-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        .profile-section {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .profile-avatar {
-            width: 120px;
-            height: 120px;
-            background: #667eea;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-            font-weight: bold;
-            margin: 0 auto 1rem;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .profile-avatar img{
-            width: 120px;
-            height: 120px;
-            background: #667eea;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-            font-weight: bold;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .upload-overlay {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            background: #4caf50;
-            border-radius: 50%;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-        }
-
-        .user-type-badge {
-            background: #e3f2fd;
-            color: #1976d2;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            margin: 0.5rem 0;
-            display: inline-block;
-        }
-
-        .professional-badge {
-            background: #e8f5e8;
-            color: #4caf50;
-        }
-
-        .menu-item {
-            padding: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .menu-item:hover {
-            background: #f8f9ff;
-            color: #667eea;
-        }
-
-        .menu-item.active {
-            background: #667eea;
-            color: white;
-        }
-
-        .menu-icon {
-            font-size: 1.2rem;
-        }
-
-        .section {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        .section-title {
-            color: #333;
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 3px solid #667eea;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .form-row .form-group {
-            flex: 1;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #333;
-            font-weight: 500;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #e1e5e9;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .btn-primary {
-            background: #667eea;
-            color: white;
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .btn-primary:hover {
-            background: #5a67d8;
-        }
-
-        .btn-secondary {
-            background: #f0f0f0;
-            color: #333;
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
-            margin-right: 1rem;
-        }
-
-        .btn-secondary:hover {
-            background: #e0e0e0;
-        }
-
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .skill-tag {
-            background: #e3f2fd;
-            color: #1976d2;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .remove-skill {
-            background: none;
-            border: none;
-            color: #1976d2;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .project-card {
-            background: #f8f9ff;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            border-left: 4px solid #667eea;
-        }
-
-        .project-title {
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-meta {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-status {
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .status-active {
-            background: #e8f5e8;
-            color: #4caf50;
-        }
-
-        .status-pending {
-            background: #fff3e0;
-            color: #ff9800;
-        }
-
-        .status-completed {
-            background: #e3f2fd;
-            color: #2196f3;
-        }
-
-        .rating {
-            display: flex;
-            gap: 0.2rem;
-            margin: 0.5rem 0;
-        }
-
-        .star {
-            color: #ffc107;
-            font-size: 1.2rem;
-        }
-
-        .star.empty {
-            color: #ddd;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            main {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            
-            header {
-                padding: 1rem;
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .form-row {
-                flex-direction: column;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
     <header>
-        <a class="logo" href="../">
-            <h1>GoJob</h1>
+      <a class="logo" href="../">
+        <h1>GoJob</h1>
+      </a>
+      <div class="user-info">
+        <button class="logout-btn" onclick="window.location.href='./buscar.html'">Buscar</button>
+        <button class="logout-btn" onclick="logout()">Sair</button>
+        <a href="./perfil.html">
+          <img class="user-avatar" src="../img/Paulinho.png" />
         </a>
-        <div class="user-info">
-            <button class="logout-btn" onclick="window.location.href='./buscar.html'">Buscar</button>
-            <button class="logout-btn" onclick="logout()">Sair</button>
-            <a href="./perfil.html">
-            <img class="user-avatar" src="../img/Paulinho.png">
-            </a>
-        </div>
+      </div>
     </header>
 
     <main>
-        <div class="perfil-sidebar">
-            <div class="profile-section">
-                <div class="profile-avatar">
-                    <img src="../img/Paulinho.png" alt="" class="profile-avatar-img">
-                    <div class="upload-overlay">📷</div>
-                </div>
-                <h3>Paulinho</h3>
-                <div class="user-type-badge professional-badge">Profissional</div>
-                <p style="color: #666; margin-top: 0.5rem;">Designer Gráfico</p>
-                <div class="rating">
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span class="star">★</span>
-                    <span style="margin-left: 0.5rem; color: #666;">(4.9)</span>
-                </div>
-            </div>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        Abrir Menu
+      </button>
 
-            <div class="menu-item active" data-section="dashboard">
-                <span class="menu-icon">📊</span>
-                Dashboard
-            </div>
-            <div class="menu-item" data-section="profile">
-                <span class="menu-icon">👤</span>
-                Meu Perfil
-            </div>
-            <div class="menu-item" data-section="projects">
-                <span class="menu-icon">💼</span>
-                Projetos
-            </div>
-            <div class="menu-item" data-section="portfolio">
-                <span class="menu-icon">🎨</span>
-                Portfólio
-            </div>
-            <div class="menu-item" data-section="settings">
-                <span class="menu-icon">⚙️</span>
-                Configurações
-            </div>
-            <div class="menu-item" onclick="window.location.href='./chat.html'">
-                <span class="menu-icon">💬</span>
-                Chat
-            </div>
+      <div class="perfil-sidebar" id="perfilSidebar">
+        <div class="profile-section">
+          <div class="profile-avatar">
+            <img src="../img/Paulinho.png" alt="" class="profile-avatar-img" />
+            <div class="upload-overlay">📷</div>
+          </div>
+          <h3>Paulinho</h3>
+          <div class="user-type-badge professional-badge">Profissional</div>
+          <p>Designer Gráfico</p>
+          <div class="rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span style="margin-left: 0.5rem; color: #666;">(4.9)</span>
+          </div>
         </div>
 
-        <div class="perfil-main-content">
-            <!-- Dashboard Section -->
-            <div class="section active" id="dashboard">
-                <h2 class="section-title">Dashboard</h2>
-                
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">24</div>
-                        <div class="stat-label">Projetos Concluídos</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">3</div>
-                        <div class="stat-label">Projetos Ativos</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">R$ 12.5k</div>
-                        <div class="stat-label">Faturamento</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">4.9</div>
-                        <div class="stat-label">Avaliação Média</div>
-                    </div>
-                </div>
-
-                <h3 style="margin-bottom: 1rem;">Projetos Recentes</h3>
-                <div class="project-card">
-                    <div class="project-title">Logo para Startup Tech</div>
-                    <div class="project-meta">Cliente: Maria Santos • Prazo: 15/06/2025</div>
-                    <span class="project-status status-active">Em Andamento</span>
-                    <button class="btn-outline" onclick="window.location.href='./chat.html'" style="margin-top: 1rem; font-size: 0.8rem; padding: 0.4rem 0.8rem;">💬 Chat com Cliente</button>
-                </div>
-                <div class="project-card">
-                    <div class="project-title">Website E-commerce</div>
-                    <div class="project-meta">Cliente: Loja ABC • Concluído em: 08/06/2025</div>
-                    <span class="project-status status-completed">Concluído</span>
-                </div>
-            </div>
-
-            <!-- Profile Section -->
-            <div class="section" id="profile">
-                <h2 class="section-title">Meu Perfil</h2>
-                
-                <form>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="nome">Nome Completo</label>
-                            <input type="text" id="nome" value="Paulinho">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">E-mail</label>
-                            <input type="email" id="email" value="joao@email.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="telefone">Telefone</label>
-                            <input type="tel" id="telefone" value="(11) 99999-9999">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="cidade">Cidade</label>
-                        <input type="text" id="cidade" value="São Paulo, SP">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="categoria">Categoria Principal</label>
-                        <select id="categoria">
-                            <option value="design" selected>Design e Arte</option>
-                            <option value="programacao">Programação</option>
-                            <option value="marketing">Marketing Digital</option>
-                            <option value="redacao">Redação e Conteúdo</option>
-                            <option value="consultoria">Consultoria</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Habilidades</label>
-                        <div class="skills-list" id="skillsList">
-                            <div class="skill-tag">
-                                Photoshop
-                                <button type="button" class="remove-skill">×</button>
-                            </div>
-                            <div class="skill-tag">
-                                Illustrator
-                                <button type="button" class="remove-skill">×</button>
-                            </div>
-                            <div class="skill-tag">
-                                Branding
-                                <button type="button" class="remove-skill">×</button>
-                            </div>
-                            <div class="skill-tag">
-                                UI/UX Design
-                                <button type="button" class="remove-skill">×</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="descricao">Descrição Profissional</label>
-                        <textarea id="descricao" rows="4">Designer gráfico com 5 anos de experiência em criação de identidades visuais, logos e materiais promocionais. Especializado em branding e design digital.</textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="valorHora">Valor por Hora (R$)</label>
-                        <input type="number" id="valorHora" value="75.00" step="0.01">
-                    </div>
-
-                    <button type="button" class="btn-secondary">Cancelar</button>
-                    <button type="submit" class="btn-primary">Salvar Alterações</button>
-                </form>
-            </div>
-
-            <!-- Projects Section -->
-            <div class="section" id="projects">
-                <h2 class="section-title">Meus Projetos</h2>
-                
-                <div class="project-card">
-                    <div class="project-title">Logo para Startup Tech</div>
-                    <div class="project-meta">Cliente: Maria Santos • Iniciado em: 10/06/2025 • Valor: R$ 800,00</div>
-                    <p style="margin: 1rem 0; color: #666;">Criação de logo e manual de marca para startup de tecnologia focada em soluções IoT.</p>
-                    <span class="project-status status-active">Em Andamento</span>
-                    <button class="btn-outline" onclick="window.location.href='./chat.html'" style="margin-top: 1rem; font-size: 0.8rem; padding: 0.4rem 0.8rem;">💬 Chat com Cliente</button>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-title">Website E-commerce</div>
-                    <div class="project-meta">Cliente: Loja ABC • Concluído em: 08/06/2025 • Valor: R$ 2.500,00</div>
-                    <p style="margin: 1rem 0; color: #666;">Design completo de interface para plataforma de e-commerce com foco em UX/UI.</p>
-                    <span class="project-status status-completed">Concluído</span>
-                    <div class="rating" style="margin-top: 0.5rem;">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span style="margin-left: 0.5rem; color: #666;">(5.0)</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-title">Campanha Social Media</div>
-                    <div class="project-meta">Cliente: Empresa XYZ • Aguardando aprovação • Valor: R$ 1.200,00</div>
-                    <p style="margin: 1rem 0; color: #666;">Criação de peças gráficas para campanha de marketing digital nas redes sociais.</p>
-                    <span class="project-status status-pending">Pendente</span>
-                </div>
-            </div>
-
-            <!-- Portfolio Section -->
-            <div class="section" id="portfolio">
-                <h2 class="section-title">Portfólio</h2>
-                <p style="color: #666; margin-bottom: 2rem;">Adicione trabalhos ao seu portfólio para atrair mais clientes.</p>
-                
-                <button class="btn-primary" style="margin-bottom: 2rem;">+ Adicionar Trabalho</button>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem;">
-                    <div style="background: #f8f9ff; padding: 1rem; border-radius: 12px; text-align: center;">
-                        <div style="background-image: url('../img/1.png'); background-repeat: no-repeat; background-size: 100% auto; /* 100% na largura, altura automática */ background-position: center center; height: 200px; border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; color: #666;">
-                        </div>
-                        <h4>Logo Café Gourmet</h4>
-                        <p style="color: #666; font-size: 0.9rem;">Identidade Visual</p>
-                    </div>
-                    
-                    <div style="background: #f8f9ff; padding: 1rem; border-radius: 12px; text-align: center;">
-                        <div style="background-image: url('../img/2.png'); background-repeat: no-repeat; background-size: 100% auto; /* 100% na largura, altura automática */ background-position: center center; height: 200px; border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; color: #666;">
-                        </div>
-                        <h4>Site Restaurante</h4>
-                        <p style="color: #666; font-size: 0.9rem;">Web Design</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Settings Section -->
-            <div class="section" id="settings">
-                <h2 class="section-title">Configurações</h2>
-                
-                <h3 style="margin-bottom: 1rem;">Notificações</h3>
-                <div style="margin-bottom: 2rem;">
-                    <div class="checkbox-div">
-                        <input type="checkbox" checked>
-                        <label style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">E-mail para novos projetos</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" checked>
-                        <label style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">Notificações de mensagens</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" checked>
-                        <label style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">Newsletter semanal</label>
-                    </div>
-                </div>
-
-                <h3 style="margin-bottom: 1rem;">Segurança</h3>
-                <div class="form-group">
-                    <label for="senhaAtual">Senha Atual</label>
-                    <input type="password" id="senhaAtual" placeholder="Digite sua senha atual">
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="novaSenha">Nova Senha</label>
-                        <input type="password" id="novaSenha" placeholder="Nova senha">
-                    </div>
-                    <div class="form-group">
-                        <label for="confirmarNovaSenha">Confirmar Nova Senha</label>
-                        <input type="password" id="confirmarNovaSenha" placeholder="Confirme a nova senha">
-                    </div>
-                </div>
-                
-                <button type="button" class="btn-primary">Alterar Senha</button>
-            </div>
+        <div class="menu-item active" data-section="dashboard">
+          <span class="menu-icon">📊</span>
+          Dashboard
         </div>
+        <div class="menu-item" data-section="profile">
+          <span class="menu-icon">👤</span>
+          Meu Perfil
+        </div>
+        <div class="menu-item" data-section="projects">
+          <span class="menu-icon">💼</span>
+          Projetos
+        </div>
+        <div class="menu-item" data-section="portfolio">
+          <span class="menu-icon">🎨</span>
+          Portfólio
+        </div>
+        <div class="menu-item" data-section="settings">
+          <span class="menu-icon">⚙️</span>
+          Configurações
+        </div>
+        <div class="menu-item" onclick="window.location.href='./chat.html'">
+          <span class="menu-icon">💬</span>
+          Chat
+        </div>
+      </div>
+
+      <div class="perfil-main-content">
+        <div class="section active" id="dashboard">
+          <h2 class="section-title">Dashboard</h2>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-number">24</div>
+              <div class="stat-label">Projetos Concluídos</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">3</div>
+              <div class="stat-label">Projetos Ativos</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">R$ 12.5k</div>
+              <div class="stat-label">Faturamento</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">4.9</div>
+              <div class="stat-label">Avaliação Média</div>
+            </div>
+          </div>
+
+          <h3>Projetos Recentes</h3>
+          <div class="project-card">
+            <div class="project-title">Logo para Startup Tech</div>
+            <div class="project-meta">Cliente: Maria Santos • Prazo: 15/06/2025</div>
+            <span class="project-status status-active">Em Andamento</span>
+            <button
+              class="btn-outline"
+              onclick="window.location.href='./chat.html'"
+            >
+              💬 Chat com Cliente
+            </button>
+          </div>
+          <div class="project-card">
+            <div class="project-title">Website E-commerce</div>
+            <div class="project-meta">Cliente: Loja ABC • Concluído em: 08/06/2025</div>
+            <span class="project-status status-completed">Concluído</span>
+          </div>
+        </div>
+
+        <div class="section" id="profile">
+          <h2 class="section-title">Meu Perfil</h2>
+
+          <form>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" value="Paulinho" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" value="joao@email.com" />
+              </div>
+              <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="tel" id="telefone" value="(11) 99999-9999" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="cidade">Cidade</label>
+              <input type="text" id="cidade" value="São Paulo, SP" />
+            </div>
+
+            <div class="form-group">
+              <label for="categoria">Categoria Principal</label>
+              <select id="categoria">
+                <option value="design" selected>Design e Arte</option>
+                <option value="programacao">Programação</option>
+                <option value="marketing">Marketing Digital</option>
+                <option value="redacao">Redação e Conteúdo</option>
+                <option value="consultoria">Consultoria</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Habilidades</label>
+              <div class="skills-list" id="skillsList">
+                <div class="skill-tag">
+                  Photoshop
+                  <button type="button" class="remove-skill">×</button>
+                </div>
+                <div class="skill-tag">
+                  Illustrator
+                  <button type="button" class="remove-skill">×</button>
+                </div>
+                <div class="skill-tag">
+                  Branding
+                  <button type="button" class="remove-skill">×</button>
+                </div>
+                <div class="skill-tag">
+                  UI/UX Design
+                  <button type="button" class="remove-skill">×</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="descricao">Descrição Profissional</label>
+              <textarea id="descricao" rows="4">
+Designer gráfico com 5 anos de experiência em criação de identidades visuais, logos e materiais promocionais. Especializado em branding e design digital.</textarea
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="valorHora">Valor por Hora (R$)</label>
+              <input type="number" id="valorHora" value="75.00" step="0.01" />
+            </div>
+
+            <button type="button" class="btn-secondary">Cancelar</button>
+            <button type="submit" class="btn-primary">Salvar Alterações</button>
+          </form>
+        </div>
+
+        <div class="section" id="projects">
+          <h2 class="section-title">Meus Projetos</h2>
+
+          <div class="project-card">
+            <div class="project-title">Logo para Startup Tech</div>
+            <div class="project-meta">Cliente: Maria Santos • Iniciado em: 10/06/2025 • Valor: R$ 800,00</div>
+            <p>
+              Criação de logo e manual de marca para startup de tecnologia focada em soluções IoT.
+            </p>
+            <span class="project-status status-active">Em Andamento</span>
+            <button
+              class="btn-outline"
+              onclick="window.location.href='./chat.html'"
+            >
+              💬 Chat com Cliente
+            </button>
+          </div>
+
+          <div class="project-card">
+            <div class="project-title">Website E-commerce</div>
+            <div class="project-meta">Cliente: Loja ABC • Concluído em: 08/06/2025 • Valor: R$ 2.500,00</div>
+            <p>
+              Design completo de interface para plataforma de e-commerce com foco em UX/UI.
+            </p>
+            <span class="project-status status-completed">Concluído</span>
+            <div class="rating">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span style="margin-left: 0.5rem; color: #666;">(5.0)</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-title">Campanha Social Media</div>
+            <div class="project-meta">Cliente: Empresa XYZ • Aguardando aprovação • Valor: R$ 1.200,00</div>
+            <p>
+              Criação de peças gráficas para campanha de marketing digital nas redes sociais.
+            </p>
+            <span class="project-status status-pending">Pendente</span>
+          </div>
+        </div>
+
+        <div class="section" id="portfolio">
+          <h2 class="section-title">Portfólio</h2>
+          <p>Adicione trabalhos ao seu portfólio para atrair mais clientes.</p>
+
+          <button class="btn-primary">+ Adicionar Trabalho</button>
+
+          <div class="portfolio-grid">
+            <div class="portfolio-item">
+              <div
+                class="portfolio-item-image portfolio-img-1"
+              ></div>
+              <h4>Logo Café Gourmet</h4>
+              <p>Identidade Visual</p>
+            </div>
+
+            <div class="portfolio-item">
+              <div
+                class="portfolio-item-image portfolio-img-2"
+              ></div>
+              <h4>Site Restaurante</h4>
+              <p>Web Design</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section" id="settings">
+          <h2 class="section-title">Configurações</h2>
+
+          <h3>Notificações</h3>
+          <div class="checkbox-container">
+            <div class="checkbox-div">
+              <input type="checkbox" checked />
+              <label>E-mail para novos projetos</label>
+            </div>
+            <div class="checkbox-div">
+              <input type="checkbox" checked />
+              <label>Notificações de mensagens</label>
+            </div>
+            <div class="checkbox-div">
+              <input type="checkbox" checked />
+              <label>Newsletter semanal</label>
+            </div>
+          </div>
+
+          <h3>Segurança</h3>
+          <div class="form-group">
+            <label for="senhaAtual">Senha Atual</label>
+            <input type="password" id="senhaAtual" placeholder="Digite sua senha atual" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="novaSenha">Nova Senha</label>
+              <input type="password" id="novaSenha" placeholder="Nova senha" />
+            </div>
+            <div class="form-group">
+              <label for="confirmarNovaSenha">Confirmar Nova Senha</label>
+              <input type="password" id="confirmarNovaSenha" placeholder="Confirme a nova senha" />
+            </div>
+          </div>
+
+          <button type="button" class="btn-primary">Alterar Senha</button>
+        </div>
+      </div>
     </main>
 
     <script>
-        // Navegação entre seções
-        document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', function() {
-                // Remove active de todos os itens do menu
-                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
-                // Adiciona active ao item clicado
-                this.classList.add('active');
-                
-                // Esconde todas as seções
-                document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
-                // Mostra a seção correspondente
-                const sectionId = this.dataset.section;
-                document.getElementById(sectionId).classList.add('active');
-            });
-        });
+      const perfilSidebar = document.getElementById('perfilSidebar');
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      const menuItems = document.querySelectorAll('.menu-item');
+      const sections = document.querySelectorAll('.section');
 
-        // Função de logout
-        function logout() {
-            if (confirm('Tem certeza que deseja sair?')) {
-                alert('Logout realizado com sucesso!');
-                window.location.href = '../index.html';
-            }
+      // Função para ocultar a sidebar mobile
+      function hideMobileSidebar() {
+        if (window.innerWidth <= 768) {
+          perfilSidebar.classList.remove('mobile-show');
+          mobileMenuToggle.textContent = 'Abrir Menu';
         }
+      }
 
-        // Simular carregamento de dados baseado no tipo de usuário
-        const userType = localStorage.getItem('userType') || 'professional';
-        
-        if (userType === 'client') {
-            // Ajustar interface para cliente
-            document.querySelector('.user-type-badge').textContent = 'Cliente';
-            document.querySelector('.user-type-badge').className = 'user-type-badge';
-            
-            // Esconder seções específicas de profissional
-            document.querySelector('[data-section="portfolio"]').style.display = 'none';
-            
-            // Ajustar estatísticas para cliente
-            document.querySelector('.stats-grid').innerHTML = `
+      // Toggle do menu mobile
+      mobileMenuToggle.addEventListener('click', function() {
+        perfilSidebar.classList.toggle('mobile-show');
+        if (perfilSidebar.classList.contains('mobile-show')) {
+          this.textContent = 'Fechar Menu';
+        } else {
+          this.textContent = 'Abrir Menu';
+        }
+      });
+
+      // Navegação entre seções
+      menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+          // Remove active de todos os itens do menu
+          menuItems.forEach(i => i.classList.remove('active'));
+          // Adiciona active ao item clicado
+          this.classList.add('active');
+
+          // Esconde todas as seções
+          sections.forEach(section => section.classList.remove('active'));
+          // Mostra a seção correspondente
+          const sectionId = this.dataset.section;
+          document.getElementById(sectionId).classList.add('active');
+
+          // Oculta a sidebar no mobile após selecionar um item
+          hideMobileSidebar();
+        });
+      });
+
+      // Função de logout
+      function logout() {
+        if (confirm('Tem certeza que deseja sair?')) {
+          alert('Logout realizado com sucesso!');
+          window.location.href = '../index.html';
+        }
+      }
+
+      // Simular carregamento de dados baseado no tipo de usuário
+      const userType = localStorage.getItem('userType') || 'professional';
+
+      if (userType === 'client') {
+        // Ajustar interface para cliente
+        document.querySelector('.user-type-badge').textContent = 'Cliente';
+        document.querySelector('.user-type-badge').className = 'user-type-badge';
+
+        // Esconder seções específicas de profissional
+        document.querySelector('[data-section="portfolio"]').style.display = 'none';
+
+        // Ajustar estatísticas para cliente
+        document.querySelector('.stats-grid').innerHTML = `
                 <div class="stat-card">
                     <div class="stat-number">8</div>
                     <div class="stat-label">Projetos Contratados</div>
@@ -670,7 +380,7 @@
                     <div class="stat-label">Satisfação Média</div>
                 </div>
             `;
-        }
+      }
     </script>
-</body>
+  </body>
 </html>

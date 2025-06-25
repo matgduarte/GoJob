@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat - GoJob</title>
-
-
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="chat-page">
@@ -33,7 +31,7 @@
             
             <div class="chat-list">
                 <div class="chat-item active" data-contact="maria">
-                    <div class="contact-avatar" style="background: #ff6b6b; position: relative;">
+                    <div class="contact-avatar bg-red pos-relative">
                         MS
                         <div class="online-indicator"></div>
                     </div>
@@ -48,7 +46,7 @@
                 </div>
 
                 <div class="chat-item" data-contact="pedro">
-                    <div class="contact-avatar" style="background: #4caf50;">
+                    <div class="contact-avatar bg-green">
                         PO
                     </div>
                     <div class="chat-info">
@@ -61,7 +59,7 @@
                 </div>
 
                 <div class="chat-item" data-contact="ana">
-                    <div class="contact-avatar" style="background: #ff9800;">
+                    <div class="contact-avatar bg-orange">
                         AC
                     </div>
                     <div class="chat-info">
@@ -74,7 +72,7 @@
                 </div>
 
                 <div class="chat-item" data-contact="lucas">
-                    <div class="contact-avatar" style="background: #9c27b0;">
+                    <div class="contact-avatar bg-purple">
                         LS
                     </div>
                     <div class="chat-info">
@@ -87,7 +85,7 @@
                 </div>
 
                 <div class="chat-item" data-contact="carla">
-                    <div class="contact-avatar" style="background: #795548;">
+                    <div class="contact-avatar bg-brown">
                         CR
                     </div>
                     <div class="chat-info">
@@ -104,7 +102,7 @@
         <div class="chat-main">
             <div class="chat-header">
                 <div class="current-contact">
-                    <div class="current-avatar" style="background: #ff6b6b; position: relative;">
+                    <div class="current-avatar bg-red pos-relative">
                         MS
                         <div class="online-indicator"></div>
                     </div>
@@ -122,7 +120,7 @@
 
             <div class="messages-container" id="messagesContainer">
                 <div class="message received">
-                    <div class="message-avatar" style="background: #ff6b6b;">MS</div>
+                    <div class="message-avatar">MS</div>
                     <div class="message-content">
                         <div class="message-bubble">
                             Olá! Vi seu portfólio e fiquei impressionada com seus trabalhos. Você teria disponibilidade para criar um logo para minha startup?
@@ -132,7 +130,7 @@
                 </div>
 
                 <div class="message sent">
-                    <div class="message-avatar" style="background: #667eea;">JS</div>
+                    <div class="message-avatar">JS</div>
                     <div class="message-content">
                         <div class="message-bubble">
                             Olá Maria! Muito obrigado pelo interesse. Sim, tenho disponibilidade. Pode me contar mais sobre o projeto?
@@ -142,7 +140,7 @@
                 </div>
 
                 <div class="message received">
-                    <div class="message-avatar" style="background: #ff6b6b;">MS</div>
+                    <div class="message-avatar">MS</div>
                     <div class="message-content">
                         <div class="message-bubble">
                             É uma startup de tecnologia focada em IoT. Precisamos de um logo moderno e profissional. Qual seria o valor e prazo?
@@ -152,7 +150,7 @@
                 </div>
 
                 <div class="message sent">
-                    <div class="message-avatar" style="background: #667eea;">JS</div>
+                    <div class="message-avatar">JS</div>
                     <div class="message-content">
                         <div class="message-bubble">
                             Para um projeto de identidade visual completa (logo + manual de marca), trabalho com valor de R$ 800,00 com prazo de 7 dias úteis. Inclui 3 revisões.
@@ -162,7 +160,7 @@
                 </div>
 
                 <div class="message received">
-                    <div class="message-avatar" style="background: #ff6b6b;">MS</div>
+                    <div class="message-avatar">MS</div>
                     <div class="message-content">
                         <div class="message-bubble">
                             Perfeito! Quando podemos começar?
@@ -245,8 +243,9 @@
             if (!contact) return;
 
             // Atualizar header
-            document.querySelector('.current-avatar').textContent = contact.avatar;
-            document.querySelector('.current-avatar').style.background = contact.color;
+            const currentAvatar = document.querySelector('.current-avatar');
+            currentAvatar.textContent = contact.avatar;
+            currentAvatar.style.background = contact.color; // JS ainda controla a cor dinâmica
             document.querySelector('.current-info h3').textContent = contact.name;
             document.querySelector('.current-status').textContent = contact.status;
 
@@ -267,7 +266,6 @@
             messageDiv.className = `message ${type}`;
             
             const contact = contacts[currentContact];
-            const avatarBg = type === 'sent' ? '#667eea' : contact.color;
             const avatarText = type === 'sent' ? 'JS' : contact.avatar;
             
             let attachmentHtml = '';
@@ -284,13 +282,18 @@
             }
 
             messageDiv.innerHTML = `
-                <div class="message-avatar" style="background: ${avatarBg};">${avatarText}</div>
+                <div class="message-avatar">${avatarText}</div>
                 <div class="message-content">
                     <div class="message-bubble">${text}</div>
                     ${attachmentHtml}
                     <div class="message-time">${time}</div>
                 </div>
             `;
+            
+            // Define a cor do avatar dinamicamente via JS, pois depende do contato
+             if (type === 'received') {
+                messageDiv.querySelector('.message-avatar').style.background = contact.color;
+            }
 
             messagesContainer.appendChild(messageDiv);
             scrollToBottom();
