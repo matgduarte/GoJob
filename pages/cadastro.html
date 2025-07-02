@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro - GoJob</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="cadastro-container">
@@ -18,12 +19,12 @@
 
         <div class="user-type-selector">
             <div class="user-type active" data-type="client">
-                <div class="user-type-icon">👤</div>
+                <i data-lucide="user-round" class="user-type-icon"></i>
                 <h3>Cliente</h3>
                 <p>Quero contratar profissionais</p>
             </div>
             <div class="user-type" data-type="professional">
-                <div class="user-type-icon">💼</div>
+                <i data-lucide="briefcase-business" class="user-type-icon"></i>
                 <h3>Profissional</h3>
                 <p>Quero oferecer meus serviços</p>
             </div>
@@ -207,6 +208,7 @@
                 window.location.href = '../index.html';
             }
         }
+        lucide.createIcons();
     </script>
 </body>
 </html>
